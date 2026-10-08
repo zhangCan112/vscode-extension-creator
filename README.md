@@ -6,7 +6,7 @@
 
 | 目录 | 说明 |
 |---|---|
-| `vscode-extension-dev/` | skill 本体（SKILL.md + 模板 + references），本机经 junction 链接到 `~/.agents/skills/` 自动加载 |
+| `vscode-extension-dev/` | skill 本体（SKILL.md + 模板 + 中英双语 references：`references/` 中文 / `references-en/` 英文），本机经 junction 链接到 `~/.agents/skills/` 自动加载 |
 | `vscode-dev-cheatsheet/` | 实测项目 #1：扩展开发速查侧边栏 |
 | `todo-tree/` | 实测项目 #2：内存待办（修复复验轮） |
 | `wuxia-relations/` | 实测项目 #3：武侠人物关系图谱（QuickPick + 树 + cytoscape 图视图） |
