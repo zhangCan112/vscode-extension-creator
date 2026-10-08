@@ -1,6 +1,7 @@
 ---
 name: vscode-extension-dev-en
-description: Use when creating, modifying, debugging, or packaging a VS Code extension — scaffolding a new extension (TypeScript + esbuild), contributing commands, TreeView or Webview UI, F5 debugging, extension activation issues, or building a VSIX with vsce. Do NOT use for VS Code user settings, keybindings.json, or theme/color customization (that is configuration, not extension development). English edition of vscode-extension-dev.
+description: VS Code extension development toolbox — TypeScript + esbuild scaffold and end-to-end rules (commands, TreeView, Webview, debugging, VSIX packaging). Invoke manually for extension work.
+disable-model-invocation: true
 metadata:
   pattern: tool-wrapper+generator
   domain: vscode-extension
