@@ -23,9 +23,6 @@ TypeScript + esbuild 技术栈的 VS Code 扩展开发知识库 + 脚手架模�
 
 ## 任务路由表
 
-**语言路由**：按对话语言选目录——中文 → `references/`，English → `references-en/`（下表以 `references/` 为准，英文对话请替换）。**同步铁律：任何内容改动必须同时落两个目录。**
-(Language routing: pick the tree matching the conversation language — Chinese → `references/`, English → `references-en/`. Any content fix lands in both trees.)
-
 | 任务 | 动作 |
 |---|---|
 | 新建扩展 | 读 `references/scaffold.md`，复制 `assets/templates/ext-ts-esbuild/` |
