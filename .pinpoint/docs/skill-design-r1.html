@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><title>skill-design-r1</title></head>
+<body>
+<h1>Round 1 — 新建 VSCode 扩展开发 skill：设计树第一轮问题</h1>
+<p>环境事实已确认：<code>E:\vscode-extension-creator</code> 目前是空仓库（只有一行标题的 README），3 个候选 skill 尚未安装。我会自己去读它们的源码和官方文档，不需要你操心资料收集。</p>
+<p>现在开始 grill。设计树的根是「新建一个 VSCode 扩展开发 skill」，第一轮问当前所有可问的决策点：</p>
+<h2>Q1 — skill 的覆盖范围</h2>
+<p>全生命周期（脚手架 → 命令/UI → 调试 → 测试 → 打包 → 发布 → 本地化）还是聚焦子集？范围决定架构模式的选择，这是最大的分叉点。</p>
+<blockquote>
+<p><strong>推荐</strong>：覆盖「从零到本地打包」全流程，但分层——高频内容（脚手架、命令、Webview/TreeView、调试）做精，低频内容（发布 Marketplace、本地化）放 <code>references/</code> 按需加载。不贪大求全做百科全书。</p>
+</blockquote>
+<h2>Q2 — v1 的产出策略</h2>
+<p>两条路线：</p>
+<ul>
+<li>(a) 先花半天消化现有 3 个 skill + 官方文档，写出骨架 v1，再进实践迭代；</li>
+<li>(b) 实践先行，完全从我们的实战中零起步累积 skill 内容。</li>
+</ul>
+<blockquote>
+<p><strong>推荐</strong>：(a)+(b) 混合：先写骨架 v1（避免每次实践从零摸索），之后每做一个扩展就把踩的坑沉淀回 skill。纯 (b) 太慢，纯 (a) 容易闭门造车。</p>
+</blockquote>
+<h2>Q3 — 第一个实践项目</h2>
+<p>你想写的第一个扩展 app 是什么？这只有你知道，而且它决定 skill 先覆盖哪些 API 面（纯命令型？侧边栏？Webview？语言特性？）。另外你之前说「一些扩展 app」——是一个个来，还是心里已有清单？</p>
+<blockquote>
+<p><strong>推荐</strong>：从一个小而完整的项目开始（能走完 脚手架→实现→调试→打包 全流程的最小项目），清单里的其他项目作为后续迭代。</p>
+</blockquote>
+<h2>Q4 — skill 的最终用途</h2>
+<p>纯自用，还是打算发布到 GitHub / skills.sh 给别人装？这决定后面 skill 放哪、用什么语言写。</p>
+<blockquote>
+<p><strong>推荐</strong>：先按自用标准做，结构上保持可发布（独立目录、规范 frontmatter），成熟后再决定是否发布。</p>
+</blockquote>
+<h2>Q5 — 扩展项目的存放方式</h2>
+<p>本 repo 就叫 <code>vscode-extension-creator</code>——是打算把每个扩展作为本 repo 的子目录（练兵场模式，skill 也可能放这），还是每个扩展独立开 repo？</p>
+<blockquote>
+<p><strong>推荐</strong>：本 repo 做练兵场，每个扩展一个子目录。省去多 repo 管理成本，且 skill 离实践现场近，方便对照提炼。</p>
+</blockquote>
+<hr/>
+<p>回答这一轮后，下一轮会问：架构模式选择（依赖 Q1）、skill 存放位置与语言（依赖 Q4）、技术栈细节（依赖 Q3）。</p>
+</body></html>

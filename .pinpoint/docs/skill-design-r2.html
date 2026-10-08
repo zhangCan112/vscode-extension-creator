@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><title>skill-design-r2</title></head>
+<body>
+<h1>Round 2 — 新建 VSCode 扩展开发 skill：设计树第二轮问题</h1>
+<p>Round 1 已全部确认：覆盖「从零到本地打包」分层全流程、混合策略（先骨架 v1 再实践沉淀）、小而完整的首个项目、自用为主保持可发布、本 repo 做练兵场。</p>
+<p>但注意：Q3 你同意的是「从小项目开始」这个策略，<strong>第一个扩展具体做什么还没定</strong>——本轮补上。以下是第二轮前沿问题：</p>
+<h2>Q1 — 架构模式（skill-architect 决策树）</h2>
+<p>候选组合：</p>
+<ul>
+<li><strong>Tool Wrapper</strong>（领域专家知识库，<code>references/</code> 按需加载）</li>
+<li><strong>Tool Wrapper + Generator</strong>（知识库 + <code>assets/</code> 脚手架模板：package.json / tsconfig / launch.json / webview 样板）</li>
+<li><strong>Pipeline</strong>（「新建扩展」走 固定步骤→实现→校验→打包 的带门流水线）</li>
+</ul>
+<blockquote>
+<p><strong>推荐</strong>：Tool Wrapper + Generator 组合，不套 Pipeline。理由：写扩展不是每次走同一条流水线（命令型/Webview 型/语言特性型路径差异大），硬套门控只会添堵；skill 的核心价值是领域知识 + 可复用模板。skill-architect 铁律：证明有收益才加 Pipeline 复杂度。</p>
+</blockquote>
+<h2>Q2 — skill 的身份三件套：位置、名字、语言</h2>
+<ul>
+<li><strong>位置</strong>：<code>C:\Users\user\.agents\skills\</code>（你的 9 个 skill 在这）还是 <code>C:\Users\user\.claude\skills\</code>（writing-skills、evolving-skill-rules 在这）？两者都会被加载。</li>
+<li><strong>名字</strong>：<code>vscode-extension-dev</code>？还是别的？</li>
+<li><strong>语言</strong>：frontmatter description 用英文（触发匹配更稳）+ 正文中文？</li>
+</ul>
+<blockquote>
+<p><strong>推荐</strong>：放 <code>C:\Users\user\.agents\skills\vscode-extension-dev\</code>（你大部分 skill 的根据地），名字就用 <code>vscode-extension-dev</code>，description 英文 + 正文中文。</p>
+</blockquote>
+<h2>Q3 — 技术栈（skill 模板将固化这个选择）</h2>
+<ul>
+<li>语言：TypeScript（官方生态默认）</li>
+<li>打包：esbuild（官方 generator 现默认）vs 不打包 vs webpack</li>
+<li>脚手架：用官方 <code>yo code</code> 生成器，还是 skill 自带手写模板（<code>assets/</code> 里放我们自己的样板，可控、可演化）？</li>
+</ul>
+<blockquote>
+<p><strong>推荐</strong>：TypeScript + esbuild + 手写模板。不依赖 <code>yo</code>——skill 自带模板才能把我们的实践经验固化进去，<code>yo</code> 生成的样板反而是要被替换的。</p>
+</blockquote>
+<h2>Q4 — 第一个扩展到底做什么（开放题）</h2>
+<p>你之前说「想写一些扩展 app」——心里有既定想法就说出来；没有的话我提一个默认提案：</p>
+<ul>
+<li><strong>提案</strong>：「扩展开发速查」侧边栏——TreeView 列官方 API 文档链接 + 常用代码 snippet 一键插入 + 几个 Command Palette 命令。小而完整，同时覆盖命令、TreeView、状态栏，走完全流程。</li>
+</ul>
+<blockquote>
+<p><strong>推荐</strong>：如果你没有更想做的，就用上面的提案；有既定想法则直接告诉我，skill 的首批 references 会围绕它的 API 面来写。</p>
+</blockquote>
+<hr/>
+<p>本轮答完后，剩余分支只剩：v1 骨架的验收清单（我来起草、你确认）。读完 3 个现有 skill 源码 + 官方文档后我会开始搭 v1。</p>
+</body></html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><title>skill-design-r3</title></head>
+<body>
+<h1>Round 3（最后一轮）— v1 骨架验收清单</h1>
+<p>Round 2 已确认：Tool Wrapper + Generator、放 <code>~/.agents/skills/vscode-extension-dev/</code>、TS + esbuild + 手写模板、首个项目为「扩展开发速查」侧边栏。</p>
+<h2>功课摘要（来自 3 个现有 skill 的源码）</h2>
+<table>
+<thead>
+<tr>
+<th>来源</th>
+<th>吸收什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>awesome-copilot/vscode-ext-commands</td>
+<td>命令双类型规范：常规命令（必须有 category，Command Palette 可见）vs 侧边栏命令（<code>_</code> 前缀 + <code>#sideBar</code> 后缀，必须有 icon，<code>enablement</code>/<code>when</code> 控制可见性）</td>
+</tr>
+<tr>
+<td>awesome-copilot/vscode-ext-localization</td>
+<td>本地化三通道：manifest → <code>package.nls.LANG.json</code>；源码字符串 → <code>bundle.l10n.LANG.json</code>；walkthrough → 分语言 Markdown</td>
+</tr>
+<tr>
+<td>aktsmm/vscode-extension-guide</td>
+<td>结构范式（SKILL.md 做路由 hub + references/ 分主题）、Done Criteria 清单式验收、<code>artifacts/vsix/</code> 归档约定、常见故障速查表、命名一致性表（包名/设置键/命令 ID/视图 ID 同前缀）</td>
+</tr>
+</tbody>
+</table>
+<h2>v1 目录结构</h2>
+<pre><code><span class="line">C:\Users\user\.agents\skills\vscode-extension-dev\</span><span class="line">├── SKILL.md                       # ≤150 行：frontmatter + When to use + 任务路由表 + Reference Map</span><span class="line">├── assets\</span><span class="line">│   └── templates\</span><span class="line">│       └── ext-ts-esbuild\        # 最小可跑模板（Generator 资产）</span><span class="line">│           ├── package.json       # engines.vscode + main + 一个 hello 命令</span><span class="line">│           ├── tsconfig.json</span><span class="line">│           ├── esbuild.mjs        # 官方范例同款 bundle 脚本</span><span class="line">│           ├── .vscode\launch.json    # F5 调试配置</span><span class="line">│           ├── .vscodeignore</span><span class="line">│           └── src\extension.ts</span><span class="line">└── references\</span><span class="line">    ├── scaffold.md            # 复制模板→改 manifest→install→F5 的手搭流程</span><span class="line">    ├── commands.md            # 命令双类型规范（吸收 awesome-copilot）</span><span class="line">    ├── treeview-webview.md    # 首项目需要的 TreeView/命令/状态栏最小实现</span><span class="line">    ├── debug-package.md       # 调试技巧 + vsce package + .vscodeignore</span><span class="line">    └── lessons.md             # 实践踩坑回填区（进化式，后续再分流到主题文件）</span></code></pre>
+<h2>Done Criteria（逐条可勾选）</h2>
+<ol>
+<li><strong>模板零修改可跑</strong>：复制 <code>ext-ts-esbuild</code> → <code>npm install</code> → F5，扩展开发宿主中激活，Command Palette 能执行 hello 命令</li>
+<li><strong>渐进披露</strong>：SKILL.md 只做路由不含领域知识；单条 reference ≤300 行</li>
+<li><strong>触发可靠</strong>：英文 description 覆盖「新建扩展 / 改扩展 / 调试 / 打包 vsix」语义</li>
+<li><strong>正文中文 + description 英文</strong></li>
+<li><strong>命令规范、本地化三通道、命名一致性表</strong>已收进对应 reference</li>
+<li><strong>实战验证</strong>：首个扩展 <code>vscode-dev-cheatsheet</code>（本 repo 子目录）全程用该 skill 指导完成，踩坑当天回填 <code>lessons.md</code></li>
+</ol>
+<h2>v1 明确不做（留给实践迭代）</h2>
+<ul>
+<li>Marketplace 发布细节（PAT、账号、CI）</li>
+<li>测试（<code>@vscode/test-electron</code>）</li>
+<li>LM Tools / Chat participant 类扩展</li>
+<li>Webview 深度主题（首项目用到 TreeView，Webview 只留最小样例）</li>
+</ul>
+<hr/>
+<p>这是设计树最后一个节点。确认后流程：搭 v1 → 自检（skill-architect Phase 4 checklist）→ 开始第一个扩展。</p>
+</body></html>
