@@ -1,0 +1,13 @@
+{
+  "module": "editor",
+  "tier": "feature",
+  "description": "编辑器主界面：文本编辑、查找替换入口",
+  "send": [
+    { "to": "document", "type": "command" },
+    { "to": "search", "type": "query" },
+    { "to": "telemetry", "type": "command", "note": "埋点上报——telemetry 尚未授权接收" }
+  ],
+  "receive": [
+    { "from": "shell", "type": "command" }
+  ]
+}

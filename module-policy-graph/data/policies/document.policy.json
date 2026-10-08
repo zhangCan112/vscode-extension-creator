@@ -1,0 +1,14 @@
+{
+  "module": "document",
+  "tier": "domain",
+  "description": "文档领域模型：内容、变更与持久化编排",
+  "send": [
+    { "to": "index", "type": "command" },
+    { "to": "fs", "type": "command" }
+  ],
+  "receive": [
+    { "from": "editor", "type": "command" },
+    { "from": "explorer", "type": "viewquery" },
+    { "from": "index", "type": "viewquery" }
+  ]
+}

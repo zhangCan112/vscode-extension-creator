@@ -1,0 +1,12 @@
+{
+  "module": "config",
+  "tier": "infra",
+  "description": "配置基础设施：加载、监听与持久化",
+  "send": [
+    { "to": "fs", "type": "command" }
+  ],
+  "receive": [
+    { "from": "shell", "type": "query" },
+    { "from": "editor", "type": "query", "note": "预留授权——编辑器尚未声明发送" }
+  ]
+}

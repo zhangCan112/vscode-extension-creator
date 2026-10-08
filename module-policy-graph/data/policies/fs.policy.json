@@ -1,0 +1,11 @@
+{
+  "module": "fs",
+  "tier": "infra",
+  "description": "文件系统适配层：最底层，不发送任何消息",
+  "send": [],
+  "receive": [
+    { "from": "document", "type": "command" },
+    { "from": "git", "type": "command" },
+    { "from": "config", "type": "command" }
+  ]
+}

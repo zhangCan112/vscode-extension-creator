@@ -1,0 +1,11 @@
+{
+  "module": "search",
+  "tier": "feature",
+  "description": "全文搜索服务：只读索引视图，不直接读文件",
+  "send": [
+    { "to": "index", "type": "viewquery" }
+  ],
+  "receive": [
+    { "from": "editor", "type": "query" }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "module": "index",
+  "tier": "domain",
+  "description": "倒排索引领域模型：构建与查询",
+  "send": [
+    { "to": "document", "type": "viewquery", "note": "重建索引时读文档只读视图" }
+  ],
+  "receive": [
+    { "from": "search", "type": "viewquery" },
+    { "from": "document", "type": "command" }
+  ]
+}
