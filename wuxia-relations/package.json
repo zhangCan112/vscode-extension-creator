@@ -1,0 +1,129 @@
+{
+  "name": "wuxia-relations",
+  "displayName": "武侠人物关系图谱",
+  "description": "内置武侠人物关系数据：命令面板实时搜索人名或关系类型，侧边栏树视图持久展示、支持下钻，Webview 力导向关系图与树/搜索双向联动。",
+  "version": "0.1.0",
+  "publisher": "indie-dev",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "wuxiaRelations.search",
+        "title": "搜索人物或关系",
+        "category": "武侠图谱",
+        "icon": "$(search)"
+      },
+      {
+        "command": "wuxiaRelations.openGraph",
+        "title": "打开关系图视图",
+        "category": "武侠图谱",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "wuxiaRelations.refresh",
+        "title": "重新加载数据",
+        "category": "武侠图谱",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "wuxiaRelations.clearFilter",
+        "title": "返回全部人物",
+        "category": "武侠图谱",
+        "icon": "$(clear-all)"
+      },
+      {
+        "command": "wuxiaRelations.focusPerson",
+        "title": "查看人物关系",
+        "category": "武侠图谱"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "wuxiaRelations.openGraph",
+          "when": "view == wuxiaRelationsGraph",
+          "group": "navigation",
+          "order": 0
+        },
+        {
+          "command": "wuxiaRelations.search",
+          "when": "view == wuxiaRelationsGraph",
+          "group": "navigation",
+          "order": 1
+        },
+        {
+          "command": "wuxiaRelations.clearFilter",
+          "when": "view == wuxiaRelationsGraph",
+          "group": "navigation",
+          "order": 2
+        },
+        {
+          "command": "wuxiaRelations.refresh",
+          "when": "view == wuxiaRelationsGraph",
+          "group": "navigation",
+          "order": 3
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "wuxiaRelations.refresh",
+          "when": "false"
+        },
+        {
+          "command": "wuxiaRelations.clearFilter",
+          "when": "false"
+        },
+        {
+          "command": "wuxiaRelations.focusPerson",
+          "when": "false"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "wuxiaRelations",
+          "title": "武侠图谱",
+          "icon": "media/bar.svg"
+        }
+      ]
+    },
+    "views": {
+      "wuxiaRelations": [
+        {
+          "id": "wuxiaRelationsGraph",
+          "name": "人物关系"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "wuxiaRelationsGraph",
+        "contents": "没有匹配的人物或关系。\n[清除过滤，返回全部](command:wuxiaRelations.clearFilter)\n[搜索人物或关系](command:wuxiaRelations.search)"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "check-types": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.webview.json",
+    "compile": "npm run check-types && node esbuild.mjs",
+    "watch": "npm run check-types && node esbuild.mjs --watch",
+    "package": "npm run check-types && node esbuild.mjs --production"
+  },
+  "dependencies": {
+    "cytoscape": "^3.34.3"
+  },
+  "devDependencies": {
+    "@types/node": "22.x",
+    "@types/vscode": "^1.85.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.0"
+  }
+}

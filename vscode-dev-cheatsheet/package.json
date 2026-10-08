@@ -1,0 +1,131 @@
+{
+  "name": "dev-cheatsheet",
+  "displayName": "Dev Cheatsheet",
+  "description": "Cheat sheet for VS Code extension development: official docs links and ready-to-insert API snippets",
+  "version": "0.0.1",
+  "publisher": "indie-dev",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "devCheatsheet",
+          "title": "Dev Cheatsheet",
+          "icon": "media/bar.svg"
+        }
+      ]
+    },
+    "views": {
+      "devCheatsheet": [
+        {
+          "id": "devCheatsheetDocs",
+          "name": "Cheatsheet"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "devCheatsheetDocs",
+        "contents": "No cheatsheet entries match your filter.\n[Clear Filter](command:devCheatsheet.clearFilter)\nTo browse the official docs, [open the docs home](command:devCheatsheet.openDocsHome)."
+      }
+    ],
+    "commands": [
+      {
+        "command": "devCheatsheet.insertSnippet",
+        "title": "Insert Snippet",
+        "category": "Dev Cheatsheet"
+      },
+      {
+        "command": "devCheatsheet.refreshTree",
+        "title": "Refresh Tree",
+        "category": "Dev Cheatsheet",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "devCheatsheet.openDocsHome",
+        "title": "Open Docs Home",
+        "category": "Dev Cheatsheet"
+      },
+      {
+        "command": "devCheatsheet.showLogs",
+        "title": "Show Logs",
+        "category": "Dev Cheatsheet"
+      },
+      {
+        "command": "devCheatsheet.filterTree",
+        "title": "Filter Cheatsheet",
+        "category": "Dev Cheatsheet",
+        "icon": "$(filter)"
+      },
+      {
+        "command": "devCheatsheet.clearFilter",
+        "title": "Clear Filter",
+        "category": "Dev Cheatsheet"
+      },
+      {
+        "command": "devCheatsheet.openDocUrl",
+        "title": "Open Documentation",
+        "category": "Dev Cheatsheet"
+      },
+      {
+        "command": "devCheatsheet.insertSnippetAtCursor",
+        "title": "Insert Snippet at Cursor",
+        "category": "Dev Cheatsheet"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "devCheatsheet.refreshTree",
+          "when": "view == devCheatsheetDocs",
+          "group": "navigation"
+        },
+        {
+          "command": "devCheatsheet.filterTree",
+          "when": "view == devCheatsheetDocs",
+          "group": "navigation"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "devCheatsheet.filterTree",
+          "when": "false"
+        },
+        {
+          "command": "devCheatsheet.clearFilter",
+          "when": "false"
+        },
+        {
+          "command": "devCheatsheet.openDocUrl",
+          "when": "false"
+        },
+        {
+          "command": "devCheatsheet.insertSnippetAtCursor",
+          "when": "false"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "check-types": "tsc --noEmit",
+    "compile": "npm run check-types && node esbuild.mjs",
+    "watch": "npm run check-types && node esbuild.mjs --watch",
+    "package": "npm run check-types && node esbuild.mjs --production"
+  },
+  "devDependencies": {
+    "@types/node": "22.x",
+    "@types/vscode": "^1.85.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.0"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "name": "mini-todos",
+  "displayName": "Mini Todos",
+  "description": "Lightweight in-memory todo list in the activity bar, with status bar counter and TODO comment insertion",
+  "version": "0.0.1",
+  "publisher": "indie-dev",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "miniTodos.addTodo",
+        "title": "Add Todo",
+        "category": "Mini Todos",
+        "icon": "$(plus)"
+      },
+      {
+        "command": "miniTodos.insertTodoComment",
+        "title": "Insert TODO Comment",
+        "category": "Mini Todos"
+      },
+      {
+        "command": "miniTodos.toggleTodo",
+        "title": "Toggle Todo",
+        "category": "Mini Todos"
+      },
+      {
+        "command": "miniTodos.deleteTodo",
+        "title": "Delete Todo",
+        "category": "Mini Todos",
+        "icon": "$(trash)"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "miniTodos",
+          "title": "Mini Todos",
+          "icon": "media/bar.svg"
+        }
+      ]
+    },
+    "views": {
+      "miniTodos": [
+        {
+          "id": "miniTodosView",
+          "name": "Todos"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "miniTodosView",
+        "contents": "No todos yet.\n[Add first todo](command:miniTodos.addTodo)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "miniTodos.addTodo",
+          "when": "view == miniTodosView",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "miniTodos.deleteTodo",
+          "when": "view == miniTodosView",
+          "group": "inline"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "miniTodos.toggleTodo",
+          "when": "false"
+        },
+        {
+          "command": "miniTodos.deleteTodo",
+          "when": "false"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "check-types": "tsc --noEmit",
+    "compile": "npm run check-types && node esbuild.mjs",
+    "watch": "npm run check-types && node esbuild.mjs --watch",
+    "package": "npm run check-types && node esbuild.mjs --production"
+  },
+  "devDependencies": {
+    "@types/node": "22.x",
+    "@types/vscode": "^1.85.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.0"
+  }
+}
