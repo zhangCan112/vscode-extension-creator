@@ -64,7 +64,7 @@ tree.reveal(target, { focus: true, select: true, expand: 2 })
     .then(undefined, e => logger.warn(e.message));   // Thenable 没有 .catch，只能这样接错
 ```
 
-- `reveal` 自驱解析父链，fire 刷新事件后可直接调用；但**目标元素实例必须与 provider `getChildren` 返回的是同一引用**——在 provider 的状态里存住要 reveal 的对象再调
+- `reveal` 自驱解析父链，fire 刷新事件后可直接调用——它的工作方式是**重新走一遍 provider 取子节点**来定位目标，所以调用时父链上的实例必须已就位（节点是重建生成的，就先重建完再 fire）；**目标元素实例必须与 provider `getChildren` 返回的是同一引用**——在 provider 的状态里存住要 reveal 的对象再调
 - TS 判别式收窄不穿透 `this.filter` 这类状态字段进闭包——进闭包前先取局部 `const`
 
 ### 空状态提示（viewWelcome）
@@ -76,6 +76,8 @@ tree.reveal(target, { focus: true, select: true, expand: 2 })
 ```
 
 注意：有 children 时 viewWelcome 不显示；`contents` 里链接只能指向命令。**空状态必须可达**——树永远非空时 viewWelcome 是死配置，它只在「过滤无结果 / 无数据源」这类真实场景才有意义，否则别配。
+
+宿主重启后 provider 的内存状态不恢复，树回到空态/欢迎页——这是可接受的默认；确需跨重启记住过滤条件，把条件存进 `context.workspaceState`。
 
 ## 状态栏
 
@@ -158,11 +160,11 @@ const web  = { entryPoints: ["src/graphView/main.ts"], bundle: true, format: "ii
 ```
 
 - 两个 bundle 共享的协议/类型文件**禁止 import vscode**，否则进不了 webview bundle
-- webview 入口 import 的 `.css` 由 esbuild 旁路产出同名 css 文件，HTML 里经 `asWebviewUri` 引用
+- webview 入口 import 的 `.css` 由 esbuild 旁路产出同名 css 文件，HTML 里经 `asWebviewUri` 引用（CSP 的 `style-src ${cspSource}` 同样覆盖它，与 JS 一个待遇）
 
 ### tsconfig 拆分
 
-webview 代码需要 DOM lib，宿主代码不要。子配置 `tsconfig.webview.json`：`extends` 主配置 + `lib` 加 `DOM/DOM.Iterable` + `include` 只收 webview 目录。**坑：`extends` 会继承主配置的 `exclude`**（若主配置恰好排除了 webview 目录，会抵消本文件的 include，报 TS18003）——子配置显式覆写 `"exclude": []`。
+webview 代码需要 DOM lib，宿主代码不要。子配置 `tsconfig.webview.json`：`extends` 主配置 + `lib` 加 `DOM/DOM.Iterable` + `include` 只收 webview 目录。**坑：`extends` 会继承主配置的 `exclude`**（若主配置恰好排除了 webview 目录，会抵消本文件的 include，报 TS18003）——子配置显式覆写 `"exclude": []`。浏览器侧再补 `module: "ESNext"` + `moduleResolution: "Bundler"`（父配置的 Node16 能用但与 esbuild 语义不合）；webview 代码 `import "./x.css"` 需要一个 webview 侧的 `declare module "*.css"` 环境声明文件。
 
 ### ready 握手（时序）
 
@@ -178,3 +180,4 @@ webview 加载是异步的，宿主创建 panel 后立刻 `postMessage` 会**丢
 
 - CSS 全部用 `--vscode-*` 主题变量（前景/背景/边框整套），不写死颜色
 - **canvas 渲染吃不到 CSS 变量**（图库大多画 canvas）：用 `getComputedStyle(document.body).getPropertyValue("--vscode-xxx")` 取值，再 `MutationObserver` 监听 body 的 `data-vscode-theme-kind` 属性变化热替换（主题切换不丢画布状态）
+- 动态改色时注意 CSP：`setAttribute("style", …)` 会被拦，但 CSSOM 写入（`el.style.color = …`）不受限——图例色块热更新用后者

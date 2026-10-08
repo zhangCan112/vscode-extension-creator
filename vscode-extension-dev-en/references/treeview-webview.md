@@ -64,7 +64,7 @@ tree.reveal(target, { focus: true, select: true, expand: 2 })
     .then(undefined, e => logger.warn(e.message));   // Thenable has no .catch — this is the error hook
 ```
 
-- `reveal` resolves the parent chain by itself; calling it right after firing the refresh event is fine. But **the target instance must be the same reference the provider's `getChildren` returns** — store the object-to-reveal in the provider's state before calling
+- `reveal` resolves the parent chain by itself; calling it right after firing the refresh event is fine — the way it works is **re-walking the provider's children** to locate the target, so the instances along the chain must already be in place (when nodes are rebuilt, finish rebuilding before firing the event). And **the target instance must be the same reference the provider's `getChildren` returns** — store the object-to-reveal in the provider's state before calling
 - TS discriminated-union narrowing does not pierce a `this.filter` state field into a closure — copy it to a local `const` first
 
 ### Empty-state hints (viewWelcome)
@@ -76,6 +76,8 @@ tree.reveal(target, { focus: true, select: true, expand: 2 })
 ```
 
 With children present, viewWelcome stays hidden; links inside `contents` can only target commands. **The empty state must be reachable** — for a tree that is never empty, viewWelcome is dead config. It earns its keep only in real "filter has no results / no data source" scenarios; otherwise leave it out.
+
+In-memory provider state does not survive a host restart — the tree falls back to empty/welcome, an acceptable default; to remember a filter across restarts, persist the condition in `context.workspaceState`.
 
 ## Status bar
 
@@ -158,11 +160,11 @@ const web  = { entryPoints: ["src/graphView/main.ts"], bundle: true, format: "ii
 ```
 
 - Protocol/type files shared by both bundles **must not import vscode** — they would never survive into the webview bundle
-- A `.css` imported by the webview entry is emitted as a sibling css file by esbuild; reference it in the HTML via `asWebviewUri`
+- A `.css` imported by the webview entry is emitted as a sibling css file by esbuild; reference it in the HTML via `asWebviewUri` (the CSP's `style-src ${cspSource}` covers it exactly like the JS)
 
 ### tsconfig split
 
-Webview code needs the DOM lib; host code must not have it. A child `tsconfig.webview.json`: `extends` the main config + `lib` gains `DOM/DOM.Iterable` + `include` only the webview folder. **Trap: `extends` inherits the parent's `exclude`** (a parent that excludes the webview folder cancels the child's `include` — TS18003): override `"exclude": []` in the child.
+Webview code needs the DOM lib; host code must not have it. A child `tsconfig.webview.json`: `extends` the main config + `lib` gains `DOM/DOM.Iterable` + `include` only the webview folder. **Trap: `extends` inherits the parent's `exclude`** (a parent that excludes the webview folder cancels the child's `include` — TS18003): override `"exclude": []` in the child. For the browser side add `module: "ESNext"` + `moduleResolution: "Bundler"` (the parent's Node16 works but mismatches esbuild semantics); importing `./x.css` in webview code needs a webview-side `declare module "*.css"` ambient declaration.
 
 ### The ready handshake (timing)
 
@@ -178,3 +180,4 @@ A webview loads asynchronously; a `postMessage` fired right after `createWebview
 
 - Style exclusively with `--vscode-*` theme variables (the full foreground/background/border set); hard-coded colors are banned
 - **Canvas rendering cannot consume CSS variables** (most graph libraries paint canvas): resolve values with `getComputedStyle(document.body).getPropertyValue("--vscode-xxx")`, then watch body's `data-vscode-theme-kind` attribute with a `MutationObserver` and hot-swap — theme switches without losing canvas state
+- Mind the CSP when recoloring dynamically: `setAttribute("style", …)` gets blocked, but CSSOM writes (`el.style.color = …`) do not — hot-swap legend swatches with the latter

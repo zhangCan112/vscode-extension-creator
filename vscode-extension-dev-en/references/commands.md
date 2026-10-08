@@ -65,6 +65,8 @@ vscode.commands.registerCommand("devCheatsheet.openDoc", (...args: unknown[]) =>
 });
 ```
 
+For primitive arguments one line suffices: `(arg: unknown) => { if (typeof arg !== "string") return; /* use arg */ }`.
+
 ## Code side
 
 ```ts
@@ -100,6 +102,7 @@ Traps (all real crash sites):
 - **QuickPick applies its own fuzzy filter to `items`**: dynamically generated entries whose label lacks the current input get silently hidden — enable `matchOnDescription` / `matchOnDetail` and duplicate the searchable text into description/detail
 - A "No matches" placeholder needs `alwaysShow: true`, or the same filter eats it
 - Labels accept inline `$(codicon)` icons
+- Section headers use `QuickPickItemKind.Separator`; the built-in fuzzy filter's treatment of separators has shifted across VS Code versions — if you rely on grouping, test once on your minimum engines
 
 ## Touching the editor from a command (insert at cursor)
 

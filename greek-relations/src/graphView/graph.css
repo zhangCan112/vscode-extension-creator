@@ -1,0 +1,115 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--vscode-editor-background);
+  color: var(--vscode-editor-foreground);
+  font-family: var(--vscode-font-family);
+}
+
+#graph {
+  position: absolute;
+  inset: 0;
+}
+
+#legend {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 8px 10px;
+  font-size: 11px;
+  line-height: 1.2;
+  border-radius: 4px;
+  border: 1px solid var(--vscode-editorWidget-border, var(--vscode-widget-border));
+  background-color: var(--vscode-editorWidget-background, var(--vscode-editor-background));
+  color: var(--vscode-descriptionForeground);
+  user-select: none;
+}
+
+#legend.hidden {
+  display: none;
+}
+
+.legend-title {
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+.legend-title:first-child {
+  margin-top: 0;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+}
+
+.legend-swatch {
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 2px;
+  flex: none;
+}
+
+.legend-line {
+  width: 22px;
+  margin-right: 6px;
+  flex: none;
+  border-top-style: solid;
+  border-top-width: 2px;
+}
+
+.legend-line.dotted {
+  border-top-style: dotted;
+}
+
+.legend-line.dashed {
+  border-top-style: dashed;
+}
+
+#hint {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+  padding: 4px 8px;
+  font-size: 11px;
+  border-radius: 4px;
+  border: 1px solid var(--vscode-editorWidget-border, var(--vscode-widget-border));
+  background-color: var(--vscode-editorWidget-background, var(--vscode-editor-background));
+  color: var(--vscode-descriptionForeground);
+  user-select: none;
+}
+
+#info {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  z-index: 10;
+  max-width: 60%;
+  padding: 8px 10px;
+  font-size: 12px;
+  white-space: pre-wrap;
+  border-radius: 4px;
+  border: 1px solid var(--vscode-editorWidget-border, var(--vscode-widget-border));
+  background-color: var(--vscode-editorWidget-background, var(--vscode-editor-background));
+  color: var(--vscode-editor-foreground);
+}
+
+#info.hidden {
+  display: none;
+}
+
+#info .info-title {
+  font-weight: bold;
+}

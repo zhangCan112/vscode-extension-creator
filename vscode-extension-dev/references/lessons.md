@@ -39,3 +39,10 @@
 - 症状：Webview 章节停留在最小内联样例——双 bundle 构建、外链脚本 CSP（cspSource vs nonce）、ready 握手时序、单例生命周期、canvas 吃不到 CSS 变量，五块全靠自己补；另踩 tsconfig extends 继承 exclude（TS18003）
 - 根因：v1 的 Webview 章节只覆盖"最小安全样例"，缺真实 webview 应用的工程层
 - 规则：五块已补进 treeview-webview.md「Webview 工程化」节；cytoscape 拖拽误触 tap 的区分属库特定经验，不入正文
+
+## 2026-10-08 第五场实测（greek-relations，英文版验证）：英文树通过
+
+- 场景：两阶段隔离实测（阶段一：数据 + QuickPick 实时搜索 + 树联动；阶段二：Webview 图视图），全程只用 vscode-extension-dev-en
+- 症状：无功能性缺口；收 7 处微缺口——reveal 时序原理、Separator 过滤行为、宿主重启后树状态、原始值类型守卫、旁路 css 的 CSP 待遇、子 tsconfig 的 module 设置、CSSOM 与 CSP 的关系
+- 根因：微缺口均属「规则成立但没讲为什么/边界」
+- 规则：7 处已同步分流至中英两棵树；Webview 工程化五块全部被验证有效，前 18 处修复继续生效

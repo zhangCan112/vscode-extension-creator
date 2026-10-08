@@ -65,6 +65,8 @@ vscode.commands.registerCommand("devCheatsheet.openDoc", (...args: unknown[]) =>
 });
 ```
 
+参数是原始值时一行就够：`(arg: unknown) => { if (typeof arg !== "string") return; /* 用 arg */ }`。
+
 ## 代码侧
 
 ```ts
@@ -113,6 +115,7 @@ qp.show();
 - **QuickPick 对 items 有内置模糊过滤**：动态生成的条目 label 不含当前输入会被误隐藏——开 `matchOnDescription` / `matchOnDetail`，并把可搜索文本冗余进 description/detail
 - "无匹配"占位条目要 `alwaysShow: true`，否则被同一机制滤掉
 - label 里可以用 `$(codicon)` 内联图标
+- 分组标题用 `QuickPickItemKind.Separator`；内置模糊过滤对 Separator 的处理随 VS Code 版本变过——依赖分组就在你的最低 engines 上实测一次
 
 ## 快捷键
 

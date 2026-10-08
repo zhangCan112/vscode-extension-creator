@@ -39,3 +39,10 @@ Backfill zone. After every practice run that hits a pit, append here **the same 
 - Symptom: the Webview chapter stopped at the minimal inline sample — dual bundles, external-script CSP (cspSource vs nonce), ready-handshake timing, singleton lifecycle, canvas-blind-to-CSS-variables were all self-improvised; also hit the tsconfig `extends` exclude trap (TS18003)
 - Root cause: v1's Webview chapter covered only the "minimal safe sample", missing the engineering layer of real webview apps
 - Rule: all five forked into treeview-webview.md's "Webview engineering" section; distinguishing cytoscape drag-vs-tap is library-specific experience and stays out of the main text
+
+## 2026-10-08 Fifth field test (greek-relations, English edition): EN tree passes
+
+- Scenario: two-phase isolated run (phase 1: data + QuickPick live search + tree sync; phase 2: Webview graph view) against vscode-extension-dev-en alone
+- Symptom: no functional gaps; 7 micro-gaps — reveal-timing rationale, Separator filter behavior, tree state after host restart, primitive type guards, sibling-css CSP coverage, child tsconfig module settings, CSSOM vs CSP
+- Root cause: all micro-gaps were "the rule holds but the why/edge went unstated"
+- Rule: all 7 forked into both trees (zh/en in sync); all five Webview-engineering blocks validated in practice, the 18 prior fixes held again
