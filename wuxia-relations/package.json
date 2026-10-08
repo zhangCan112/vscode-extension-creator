@@ -118,7 +118,8 @@
     "package": "npm run check-types && node esbuild.mjs --production"
   },
   "dependencies": {
-    "cytoscape": "^3.34.3"
+    "cytoscape": "^3.34.3",
+    "cytoscape-fcose": "^2.2.0"
   },
   "devDependencies": {
     "@types/node": "22.x",
