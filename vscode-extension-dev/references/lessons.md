@@ -9,7 +9,7 @@
 - 场景：在哪个项目 / 做什么任务
 - 症状：看到什么错误或反常
 - 根因：真正的原因
-- 规则：一句话可执行规则（分流目标：scaffold/commands/treeview-webview/debug-package/localization.md）
+- 规则：一句话可执行规则（分流目标：scaffold/commands/treeview-webview/graph-visualization/debug-package/localization.md）
 ```
 
 ## 铁律
@@ -39,6 +39,13 @@
 - 症状：Webview 章节停留在最小内联样例——双 bundle 构建、外链脚本 CSP（cspSource vs nonce）、ready 握手时序、单例生命周期、canvas 吃不到 CSS 变量，五块全靠自己补；另踩 tsconfig extends 继承 exclude（TS18003）
 - 根因：v1 的 Webview 章节只覆盖"最小安全样例"，缺真实 webview 应用的工程层
 - 规则：五块已补进 treeview-webview.md「Webview 工程化」节；cytoscape 拖拽误触 tap 的区分属库特定经验，不入正文
+
+## 2026-10-08 第六场实测（module-policy-graph）：图可视化设计层成文
+
+- 场景：SEND/RECEIVE 双向声明 policy 依赖图 webview（cytoscape + dagre），含确定性 100 模块生成器压测
+- 症状：图可视化设计层此前完全缺位——初版 cose 布局画 DAG、全量边标签常显、聚焦用淡化，用户连续两轮评"乱"；100 节点时总览不可读
+- 根因：布局与图语义错配、违反按需披露；skill 只覆盖 webview 工程层（双 bundle/CSP/主题），没有"图该怎么画"的风格层
+- 规则：风格指南成文 `references/graph-visualization.md`（布局选择 / 编码 / 渐进披露 / 规模阶梯 / 双向声明匹配），SKILL.md 路由表与何时使用已挂；聚焦 = 子图隔离而非淡化是本场最关键修正
 
 ## 2026-10-08 第五场实测（greek-relations，英文版验证）：英文树通过
 

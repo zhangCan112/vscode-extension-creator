@@ -17,6 +17,7 @@ A knowledge base + scaffold template for VS Code extension development on a Type
 
 - Creating a VS Code extension from scratch
 - Adding commands, TreeViews, Webviews, status bar items, or settings to an existing extension
+- Building graph visualizations (relation / dependency / policy graphs) in a Webview
 - F5 debugging not working, extension not activating, command not found
 - Packaging / installing a VSIX with vsce
 
@@ -29,6 +30,7 @@ A knowledge base + scaffold template for VS Code extension development on a Type
 | New extension | Read `references/scaffold.md`, copy `assets/templates/ext-ts-esbuild/` |
 | Add / change commands | Read `references/commands.md` |
 | Sidebar / tree view / Webview / status bar | Read `references/treeview-webview.md` |
+| Relation / dependency / graph visualization | Read `references/graph-visualization.md` |
 | Debugging / packaging a VSIX | Read `references/debug-package.md` |
 | Localization / i18n | Read `references/localization.md` |
 | Hit a pit | Check `references/lessons.md` first; backfill new pits the same day per its header format |

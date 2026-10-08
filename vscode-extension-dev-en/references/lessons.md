@@ -9,7 +9,7 @@ Backfill zone. After every practice run that hits a pit, append here **the same 
 - Scenario: which project / which task
 - Symptom: the error or anomaly observed
 - Root cause: the real cause
-- Rule: one executable sentence (fork target: scaffold/commands/treeview-webview/debug-package/localization.md)
+- Rule: one executable sentence (fork target: scaffold/commands/treeview-webview/graph-visualization/debug-package/localization.md)
 ```
 
 ## Iron rules
@@ -39,6 +39,13 @@ Backfill zone. After every practice run that hits a pit, append here **the same 
 - Symptom: the Webview chapter stopped at the minimal inline sample — dual bundles, external-script CSP (cspSource vs nonce), ready-handshake timing, singleton lifecycle, canvas-blind-to-CSS-variables were all self-improvised; also hit the tsconfig `extends` exclude trap (TS18003)
 - Root cause: v1's Webview chapter covered only the "minimal safe sample", missing the engineering layer of real webview apps
 - Rule: all five forked into treeview-webview.md's "Webview engineering" section; distinguishing cytoscape drag-vs-tap is library-specific experience and stays out of the main text
+
+## 2026-10-08 Sixth field test (module-policy-graph): graph-visualization design layer written
+
+- Scenario: a SEND/RECEIVE bidirectional-declaration policy dependency graph webview (cytoscape + dagre), with a deterministic 100-module generator for stress testing
+- Symptom: the graph-visualization design layer was entirely missing before this — the first draft drew the DAG with a cose layout, kept all edge labels persistent, and used dimming for focus; the user called it "messy" two rounds in a row; at 100 nodes the overview was unreadable
+- Root cause: layout mismatched to graph semantics plus violated on-demand disclosure; the skill covered only the webview engineering layer (dual bundles/CSP/theming), with no style layer for "how to draw a graph"
+- Rule: the style guide is now `references/graph-visualization.md` (layout selection / encoding / progressive disclosure / scale ladder / bidirectional declaration matching); SKILL.md routing table and When-to-use updated. Focus = subgraph isolation instead of dimming was the key correction of this round. Isolated-subagent retrieval test passed; 6 gaps it surfaced were patched (starter palettes, bidirectional types, cycle locating, parallel edges, TB/LR criterion, scale thresholds 60/300)
 
 ## 2026-10-08 Fifth field test (greek-relations, English edition): EN tree passes
 
