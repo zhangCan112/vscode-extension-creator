@@ -1,0 +1,10 @@
+{
+  "module": "command-palette",
+  "tier": "entry",
+  "description": "命令面板：全局命令与快速跳转入口",
+  "send": [
+    { "to": "workspace", "type": "query" },
+    { "to": "auth", "type": "query" }
+  ],
+  "receive": []
+}

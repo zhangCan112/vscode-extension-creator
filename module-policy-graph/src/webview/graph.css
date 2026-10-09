@@ -1,0 +1,299 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--vscode-font-family);
+  font-size: 12px;
+  color: var(--vscode-editor-foreground);
+  background: var(--vscode-editor-background);
+  overflow: hidden;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* —— 工具栏 —— */
+#toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  border-bottom: 1px solid var(--vscode-panel-border);
+  background: var(--vscode-editorWidget-background);
+  min-height: 34px;
+}
+
+#crumbs {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.crumb {
+  background: none;
+  border: none;
+  padding: 2px 6px;
+  font-size: 12px;
+  color: var(--vscode-textLink-foreground);
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.crumb:hover {
+  background: var(--vscode-list-hoverBackground);
+}
+
+.crumb.current {
+  color: var(--vscode-editor-foreground);
+  font-weight: 600;
+  cursor: default;
+}
+
+.crumb.current:hover {
+  background: none;
+}
+
+.sep {
+  opacity: 0.5;
+  padding: 0 2px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.tb {
+  background: var(--vscode-button-secondaryBackground);
+  color: var(--vscode-button-secondaryForeground);
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 3px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tb:hover {
+  background: var(--vscode-list-hoverBackground);
+}
+
+.tb.active {
+  background: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  border-color: var(--vscode-focusBorder);
+}
+
+/* —— 主区 —— */
+#main {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+#stage {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+#cy {
+  position: absolute;
+  inset: 0;
+}
+
+/* —— 图例 —— */
+#legend {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  max-width: 230px;
+  padding: 6px 10px 8px;
+  background: var(--vscode-editorWidget-background);
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 6px;
+  font-size: 11px;
+  user-select: none;
+}
+
+#legend .lg-head {
+  font-weight: 600;
+  opacity: 0.85;
+  cursor: pointer;
+  padding: 2px 0;
+}
+
+#legend .lg-title {
+  font-weight: 600;
+  opacity: 0.7;
+  margin: 6px 0 2px;
+}
+
+#legend .lg-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+#legend .lg-row.toggle {
+  cursor: pointer;
+}
+
+#legend .lg-row.toggle:hover {
+  background: var(--vscode-list-hoverBackground);
+}
+
+#legend .lg-row.off {
+  opacity: 0.35;
+  text-decoration: line-through;
+}
+
+#legend .lg-row.info {
+  cursor: default;
+}
+
+.sw-line {
+  width: 24px;
+  height: 0;
+  border-top: 2px solid;
+  flex: none;
+}
+
+.sw-arrow {
+  font-size: 9px;
+  line-height: 1;
+  flex: none;
+}
+
+.sw-node {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 3px solid;
+  flex: none;
+}
+
+.sw-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex: none;
+}
+
+/* —— 信息栏 —— */
+#infobar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 3px 10px;
+  font-size: 11px;
+  background: var(--vscode-editorWidget-background);
+  border-top: 1px solid var(--vscode-panel-border);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0.96;
+}
+
+/* —— 详情面板 —— */
+#detail {
+  width: 300px;
+  flex: none;
+  border-left: 1px solid var(--vscode-panel-border);
+  background: var(--vscode-sideBar-background);
+  overflow-y: auto;
+  padding: 10px 12px;
+}
+
+#detail h2 {
+  margin: 0 0 2px;
+  font-size: 15px;
+}
+
+#detail h3 {
+  margin: 14px 0 4px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+#detail .muted {
+  opacity: 0.7;
+}
+
+#detail .chip {
+  display: inline-block;
+  font-size: 10px;
+  padding: 1px 5px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  margin-left: 6px;
+  vertical-align: 1px;
+}
+
+#detail .decl {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 3px 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#detail .decl:hover {
+  background: var(--vscode-list-hoverBackground);
+}
+
+#detail .decl .dir {
+  font-weight: 700;
+  flex: none;
+}
+
+#detail .decl .who {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#detail .decl .st {
+  flex: none;
+  font-size: 11px;
+}
+
+#detail .btn {
+  margin-top: 10px;
+  margin-right: 6px;
+  background: var(--vscode-button-secondaryBackground);
+  color: var(--vscode-button-secondaryForeground);
+  border: 1px solid var(--vscode-panel-border);
+  border-radius: 3px;
+  padding: 3px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+#detail .btn:hover {
+  background: var(--vscode-list-hoverBackground);
+}
+
+#detail .kv {
+  margin: 3px 0;
+}
+
+#detail .kv b {
+  font-weight: 600;
+}

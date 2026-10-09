@@ -1,0 +1,14 @@
+{
+  "module": "editor",
+  "tier": "feature",
+  "description": "编辑器特性：文本编辑、光标与文档缓冲",
+  "send": [
+    { "to": "workspace", "type": "query" },
+    { "to": "fs", "type": "query" },
+    { "to": "logger", "type": "command" },
+    { "to": "auth", "type": "query" }
+  ],
+  "receive": [
+    { "from": "workspace", "type": "command" }
+  ]
+}

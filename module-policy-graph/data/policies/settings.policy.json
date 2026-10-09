@@ -1,0 +1,12 @@
+{
+  "module": "settings",
+  "tier": "domain",
+  "description": "设置领域：用户与工作区偏好",
+  "send": [
+    { "to": "fs", "type": "command" }
+  ],
+  "receive": [
+    { "from": "auth", "type": "query" },
+    { "from": "app-shell", "type": "command" }
+  ]
+}

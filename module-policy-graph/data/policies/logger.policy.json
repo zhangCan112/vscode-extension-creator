@@ -1,0 +1,12 @@
+{
+  "module": "logger",
+  "tier": "infra",
+  "description": "日志基础设施：审计流水与诊断采集",
+  "send": [],
+  "receive": [
+    { "from": "auth", "type": "command" },
+    { "from": "editor", "type": "command" },
+    { "from": "git", "type": "command" },
+    { "from": "fs", "type": "command" }
+  ]
+}

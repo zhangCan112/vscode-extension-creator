@@ -1,0 +1,15 @@
+{
+  "module": "fs",
+  "tier": "infra",
+  "description": "文件系统基础设施：读写、监听与路径解析",
+  "send": [
+    { "to": "logger", "type": "command" }
+  ],
+  "receive": [
+    { "from": "workspace", "type": "query" },
+    { "from": "editor", "type": "query" },
+    { "from": "file-tree", "type": "query" },
+    { "from": "git", "type": "command" },
+    { "from": "settings", "type": "command" }
+  ]
+}

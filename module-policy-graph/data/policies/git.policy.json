@@ -1,0 +1,14 @@
+{
+  "module": "git",
+  "tier": "domain",
+  "description": "版本控制领域：提交历史、分支与变更状态",
+  "send": [
+    { "to": "fs", "type": "command" },
+    { "to": "logger", "type": "command" },
+    { "to": "logger", "type": "query" }
+  ],
+  "receive": [
+    { "from": "file-tree", "type": "query" },
+    { "from": "workspace", "type": "viewquery" }
+  ]
+}

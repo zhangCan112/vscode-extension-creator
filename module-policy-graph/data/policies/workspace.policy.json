@@ -1,0 +1,16 @@
+{
+  "module": "workspace",
+  "tier": "feature",
+  "description": "工作台特性：项目会话、面板编排与模块调度",
+  "send": [
+    { "to": "editor", "type": "command" },
+    { "to": "fs", "type": "query" },
+    { "to": "file-tree", "type": "viewquery" },
+    { "to": "git", "type": "viewquery" }
+  ],
+  "receive": [
+    { "from": "app-shell", "type": "command" },
+    { "from": "command-palette", "type": "query" },
+    { "from": "editor", "type": "query" }
+  ]
+}

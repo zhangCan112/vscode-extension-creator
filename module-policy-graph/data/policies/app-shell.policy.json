@@ -1,0 +1,10 @@
+{
+  "module": "app-shell",
+  "tier": "entry",
+  "description": "应用外壳：窗口、布局与全局入口",
+  "send": [
+    { "to": "workspace", "type": "command" },
+    { "to": "auth", "type": "query" }
+  ],
+  "receive": []
+}

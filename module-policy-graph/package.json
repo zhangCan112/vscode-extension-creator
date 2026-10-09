@@ -1,0 +1,111 @@
+{
+  "name": "module-policy-graph",
+  "displayName": "模块访问策略图",
+  "description": "聚合各模块 policy 文件，可视化模块间消息访问关系（对齐通道 / 悬空授权 / 循环依赖）",
+  "version": "0.1.0",
+  "publisher": "indie-dev",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "modulePolicyGraph",
+          "title": "模块访问策略",
+          "icon": "media/bar.svg"
+        }
+      ]
+    },
+    "views": {
+      "modulePolicyGraph": [
+        {
+          "id": "modulePolicyGraphPolicies",
+          "name": "模块策略"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "modulePolicyGraphPolicies",
+        "contents": "未加载到任何模块策略。\n[重载策略文件](command:modulePolicyGraph.reloadPolicies)"
+      }
+    ],
+    "commands": [
+      {
+        "command": "modulePolicyGraph.openGraph",
+        "title": "打开策略关系图",
+        "category": "模块访问策略",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "modulePolicyGraph.reloadPolicies",
+        "title": "重载策略文件",
+        "category": "模块访问策略",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "modulePolicyGraph.generateDemo",
+        "title": "生成 100 模块演示数据",
+        "category": "模块访问策略",
+        "icon": "$(beaker)"
+      },
+      {
+        "command": "modulePolicyGraph.focusModule",
+        "title": "聚焦模块",
+        "category": "模块访问策略",
+        "icon": "$(target)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "modulePolicyGraph.openGraph",
+          "when": "view == modulePolicyGraphPolicies",
+          "group": "navigation",
+          "order": 1
+        },
+        {
+          "command": "modulePolicyGraph.reloadPolicies",
+          "when": "view == modulePolicyGraphPolicies",
+          "group": "navigation",
+          "order": 2
+        },
+        {
+          "command": "modulePolicyGraph.generateDemo",
+          "when": "view == modulePolicyGraphPolicies",
+          "group": "navigation",
+          "order": 3
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "modulePolicyGraph.focusModule",
+          "when": "false"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "check-types": "tsc --noEmit && tsc --noEmit -p tsconfig.webview.json",
+    "compile": "npm run check-types && node esbuild.mjs",
+    "watch": "npm run check-types && node esbuild.mjs --watch",
+    "package": "npm run check-types && node esbuild.mjs --production",
+    "selftest": "node esbuild.mjs --selftest && node dist/selftest.js"
+  },
+  "devDependencies": {
+    "@types/cytoscape": "^3.21.0",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.85.0",
+    "cytoscape": "^3.30.4",
+    "cytoscape-dagre": "^2.5.0",
+    "esbuild": "^0.25.0",
+    "typescript": "^5.8.0"
+  }
+}

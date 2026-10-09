@@ -1,0 +1,14 @@
+{
+  "module": "auth",
+  "tier": "domain",
+  "description": "认证与账户领域：登录态、身份与权限",
+  "send": [
+    { "to": "logger", "type": "command" },
+    { "to": "settings", "type": "query" }
+  ],
+  "receive": [
+    { "from": "app-shell", "type": "query" },
+    { "from": "command-palette", "type": "query" },
+    { "from": "editor", "type": "query" }
+  ]
+}

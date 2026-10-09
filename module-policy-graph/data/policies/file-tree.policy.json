@@ -1,0 +1,12 @@
+{
+  "module": "file-tree",
+  "tier": "feature",
+  "description": "文件树特性：目录浏览与资源管理器视图",
+  "send": [
+    { "to": "fs", "type": "query" },
+    { "to": "git", "type": "query" }
+  ],
+  "receive": [
+    { "from": "workspace", "type": "viewquery" }
+  ]
+}
