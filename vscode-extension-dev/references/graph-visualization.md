@@ -2,8 +2,6 @@
 
 做 Webview 图（节点-连线）前先读本文。核心原则：**布局跟着图语义走；编码只花在固定小集合上；信息按需披露**。图"乱"的根源几乎总是三条之一：布局与语义错配、全量标签、聚焦时无关元素仍占画面。
 
-参考实现（本 repo）：`wuxia-relations/`（对等关系网）、`module-policy-graph/`（分层 DAG + 声明匹配 + 100 节点压测）。
-
 ## 第一步：判断图语义，选布局
 
 | 图语义 | 布局 | 理由 |
@@ -58,4 +56,5 @@ DAG 一律不用力导向——方向信息会被随机位置淹没。
 - 拖拽与点击区分：drag 时置标记，吞掉松手后紧随的 tap
 - cytoscape 布局扩展（fcose/dagre）不带类型声明时补最小 ambient d.ts（`cytoscape.Ext`）
 - @types/cytoscape 严格化后：样式表里 `data()` 映射枚举属性（line-style/arrow-shape 等）过不了类型检查——整份样式表 `as unknown as cytoscape.StylesheetStyle[]` 一次解决；types 未声明集合的 `show()/hide()`，显隐一律走 class + `display:none` 样式规则；集合泛型不变（filter/union 结果互相不可重赋值），可见集合计算改为纯数据层算 id Set 再回写 class
+- cytoscape 坐标：core 没有 renderedToModel/modelToRendered，自己换算 `rendered = model × zoom + pan`（pan/zoom 实测互为逆运算）；`node.boundingBox()` 默认就是模型坐标，可直接做命中测试；`cy.png()` 导出视口快照
 - 主题色板解析、canvas 吃不到 CSS 变量的处理 → 见 `treeview-webview.md`「主题适配」

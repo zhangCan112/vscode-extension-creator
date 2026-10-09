@@ -47,6 +47,20 @@ Backfill zone. After every practice run that hits a pit, append here **the same 
 - Root cause: layout mismatched to graph semantics plus violated on-demand disclosure; the skill covered only the webview engineering layer (dual bundles/CSP/theming), with no style layer for "how to draw a graph"
 - Rule: the style guide is now `references/graph-visualization.md` (layout selection / encoding / progressive disclosure / scale ladder / bidirectional declaration matching); SKILL.md routing table and When-to-use updated. Focus = subgraph isolation instead of dimming was the key correction of this round. Isolated-subagent retrieval test passed; 6 gaps it surfaced were patched (starter palettes, bidirectional types, cycle locating, parallel edges, TB/LR criterion, scale thresholds 60/300)
 
+## 2026-10-09 Ninth field test (module-policy-graph annotation layer): live-page annotation becomes an asset
+
+- Scenario: after the user confirmed "this annotation mode is what I wanted", they asked to distill it into the skill; one round of decision Q&A with the user aligned four choices (docs + asset layering / anchor adapters / consume discipline to guarantee accurate understanding / pit routing), with the consume side adopting side-channel auditing (pending removal + audit append, traceable consumption)
+- Symptom: intercepting `click` let the graph library's tap run first (module focus → relayout → canvas narrowing and rescale; pin coordinates all wrong, hit descriptions all "blank canvas"); overlays like the legend sit on top of the canvas and geometric range checks misclassified them as in-graph clicks; cytoscape core has no renderedToModel, requiring manual `model×zoom+pan` conversion
+- Root cause: graph gestures are synthesized from pointerdown/up, so click interception is inherently one beat late; overlays share area with the canvas, making geometric classification unusable
+- Rule: annotation layer is now the asset `assets/templates/annot-layer/` (pointerdown capture interception + elementFromPoint CANVAS check + adapter contract + snapshot/hit/context quadruple + `/consume` audit); usage and consume discipline → webview-preview.md "Annotation loop" section; cytoscape coordinates/snapshot → graph-visualization.md (this pass also backfilled the seventh test's @types line that had only reached the zh tree); both trees in sync; E2E (node hit / exact anchor following / snapshot persisted / consume audit / graph undisturbed) all green
+
+## 2026-10-09 Eighth field test (module-policy-graph, continued): webview preview capability written
+
+- Scenario: the user asked to "freely annotate the final webview graph". The first delivery — a static SVG reconstruction — was rejected ("titled as views but it's really just text / it's a proposal, not the product"); switching to seven playwright live-build screenshots with DOM self-verification won acceptance, after which the user asked for the capability to be digested into the skill's own knowledge
+- Symptom: the skill covered "how to build a webview" (engineering) but not "how to show it to the user" (discussion loop); annotation tools strip scripts at intake, so a live page cannot enter their documents; `--headless=new` ignores `--virtual-time-budget`, all seven screenshots had identical byte sizes (blank); assembly pits: inlined bundle vs `</script>`, shim not defined before the bundle, a misnamed driver variable
+- Root cause: the output side of webview work (showing it to users / closing the iteration feedback loop) was entirely missing; the old-vs-new headless difference was undocumented
+- Rule: capability now lives in `references/webview-preview.md` (live-build-first principle / live page assembly / hash state machine + pp-ready marker / playwright-core screenshots / annotation-tool collaboration boundary); SKILL.md routing table and When-to-use updated; both trees in sync; the 2 rules forked in the seventh test did not recur
+
 ## 2026-10-08 Fifth field test (greek-relations, English edition): EN tree passes
 
 - Scenario: two-phase isolated run (phase 1: data + QuickPick live search + tree sync; phase 2: Webview graph view) against vscode-extension-dev-en alone

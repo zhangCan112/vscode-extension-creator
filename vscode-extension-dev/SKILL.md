@@ -18,6 +18,7 @@ TypeScript + esbuild 技术栈的 VS Code 扩展开发知识库 + 脚手架模�
 - 从零新建一个 VS Code 扩展
 - 给现有扩展加命令、TreeView、Webview、状态栏、配置项
 - 在 Webview 里做图可视化（关系图 / 依赖图 / 策略图）
+- 在浏览器里预览扩展的 Webview 页面、截图或与用户讨论 / 批注 UI 设计
 - F5 调试不生效、扩展不激活、命令找不到
 - 用 vsce 打包 / 安装 VSIX
 
@@ -31,6 +32,7 @@ TypeScript + esbuild 技术栈的 VS Code 扩展开发知识库 + 脚手架模�
 | 加 / 改命令 | 读 `references/commands.md` |
 | 侧边栏 / 树视图 / Webview / 状态栏 | 读 `references/treeview-webview.md` |
 | 做关系图 / 依赖图 / 图可视化 | 读 `references/graph-visualization.md` |
+| 预览 webview 页面 / 与用户讨论 UI 设计 | 读 `references/webview-preview.md` |
 | 调试 / 打包 VSIX | 读 `references/debug-package.md` |
 | 多语言 / 本地化 | 读 `references/localization.md` |
 | 踩坑了 | 先查 `references/lessons.md`；新坑按其头部格式当天回填 |

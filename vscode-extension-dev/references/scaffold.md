@@ -9,7 +9,7 @@ code --version   # VS Code CLI 可用
 
 ## 步骤
 
-1. **复制模板**到练兵场子目录：`E:\vscode-extension-creator\<project-name>\`（模板位于本 skill 的 `assets/templates/ext-ts-esbuild/`）
+1. **复制模板**到你的工作目录（为项目新建子目录 `<project-name>/`；模板位于本 skill 的 `assets/templates/ext-ts-esbuild/`）
 2. **按下方改名清单**处理所有标识符
 3. `npm install`
 4. 用 VS Code 打开项目目录，按 **F5**（等 watch 任务完成编译后宿主窗口启动）

@@ -47,6 +47,20 @@
 - 根因：布局与图语义错配、违反按需披露；skill 只覆盖 webview 工程层（双 bundle/CSP/主题），没有"图该怎么画"的风格层
 - 规则：风格指南成文 `references/graph-visualization.md`（布局选择 / 编码 / 渐进披露 / 规模阶梯 / 双向声明匹配），SKILL.md 路由表与何时使用已挂；聚焦 = 子图隔离而非淡化是本场最关键修正
 
+## 2026-10-09 第九场实测（module-policy-graph 批注层）：活页批注资产化
+
+- 场景：用户确认"活页自由批注模式是我想要的"后要求沉淀进 skill；与用户一轮决策问答对齐四项（文档+资产双层 / 锚定适配器 / 消化纪律保理解精度 / 坑分流），消费端采用旁路审计制（pending 移出 + audit 追加，消化可追溯）
+- 症状：初版拦 `click` 导致图库 tap 先行完成（聚焦模块→重排→画布变窄缩放变化，落针坐标全错且命中描述为"画布空白处"）；图例等覆盖层盖在画布上被几何判定误归为图内点击；cytoscape core 无 renderedToModel 需手工 `model×zoom+pan` 换算
+- 根因：图库手势由 pointerdown/up 合成，click 拦截天然滞后一拍；覆盖层与画布共享区域，几何范围判定不可用
+- 规则：批注层资产化 `assets/templates/annot-layer/`（pointerdown capture 拦截 + elementFromPoint 判 CANVAS + 适配器契约 + 快照/命中/上下文四要素 + `/consume` 审计），用法与消化纪律 → webview-preview.md「批注闭环」节；cytoscape 坐标/快照 → graph-visualization.md；中英两树同步；E2E（节点命中/锚定精确跟随/快照落盘/消化审计/图不被扰动）全绿
+
+## 2026-10-09 第八场实测（module-policy-graph 续）：webview 预览能力成文
+
+- 场景：用户要求"任意批注最终 webview 关系图"。第一版交付静态 SVG 重建版被否（"标题是视图，实际都是文字/是方案不是产品"）；改为 playwright 实机截图七状态 + DOM 断言自证后获认可，用户随后要求把该能力以消化后的自有知识沉淀进 skill
+- 症状：skill 有"webview 怎么写"（工程层）却缺"webview 怎么给用户看"（讨论层）；批注类工具在 intake 剥离 script，活页进不了其文档；`--headless=new` 忽略 `--virtual-time-budget`，七张截图字节全同（全空白）；内联 bundle 撞 `</script>`、shim 未先行、driver 读错变量名等装配坑
+- 根因：webview 能力的输出端（向用户展示 / 迭代反馈闭环）此前完全缺位；无头截图的新旧模式差异无记录
+- 规则：能力成文 `references/webview-preview.md`（实机优先原则 / 活页组装 / hash 状态机 + pp-ready 标记 / playwright-core 截图 / 与批注工具协作边界），SKILL.md 路由表与何时使用已挂；中英两树同步；第七场 2 处分流规则本场无复发
+
 ## 2026-10-09 第七场实测（module-policy-graph 隔离复测）：图风格层一次到位，新缺口集中在库类型面
 
 - 场景：不限定图库选型的隔离实测，仅凭 skill 从零建 policy 双向声明依赖图（四层 DAG + 声明匹配 + 确定性 100 模块压测 + VSIX）

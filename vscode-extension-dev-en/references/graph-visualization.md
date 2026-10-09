@@ -2,8 +2,6 @@
 
 Read this before building any Webview graph (nodes and edges). Core principle: **layout follows graph semantics; encoding is spent only on small fixed sets; information is disclosed on demand**. A "messy" graph almost always violates one of three rules: layout mismatched to semantics, all-labels-always, or irrelevant elements keeping the canvas during focus.
 
-Reference implementations (this repo): `wuxia-relations/` (peer relation network), `module-policy-graph/` (layered DAG + declaration matching + 100-node stress test).
-
 ## Step 1: identify graph semantics, pick a layout
 
 | Graph semantics | Layout | Why |
@@ -57,4 +55,6 @@ Parallel edges and cycles:
 - Legend = clickable filters (show/hide by type/category) via class + `display:none`; never delete elements
 - Distinguish drag from click: set a flag on drag and swallow the immediately following tap
 - cytoscape layout extensions (fcose/dagre) ship no type declarations — add a minimal ambient d.ts (`cytoscape.Ext`)
+- With modern @types/cytoscape: `data()`-mapped enum style properties (line-style/arrow-shape …) fail type checks — cast the whole stylesheet `as unknown as cytoscape.StylesheetStyle[]`; the types omit collection `show()/hide()`, so toggle visibility via class + `display:none` rules; collection generics are invariant (filter/union results cannot reassign to each other) — compute visible id Sets in a pure data layer and write classes back
+- cytoscape coordinates: the core has no renderedToModel/modelToRendered — convert yourself with `rendered = model × zoom + pan` (verified as exact inverses); `node.boundingBox()` already returns model coordinates by default, usable for hit-testing; `cy.png()` exports a viewport snapshot
 - Theme palette resolution, canvas-blind-to-CSS-variables → see `treeview-webview.md`, "Theming"

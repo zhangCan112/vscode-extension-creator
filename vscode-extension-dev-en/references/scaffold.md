@@ -9,7 +9,7 @@ code --version   # VS Code CLI on PATH
 
 ## Steps
 
-1. **Copy the template** into a subdirectory of the practice repo: `E:\vscode-extension-creator\<project-name>\` (the template lives in this skill at `assets/templates/ext-ts-esbuild/`)
+1. **Copy the template** into your working directory (create a `<project-name>/` subdirectory for the project; the template lives in this skill at `assets/templates/ext-ts-esbuild/`)
 2. **Work through the rename checklist** below
 3. `npm install`
 4. Open the project folder in VS Code and press **F5** (wait for the watch task to finish compiling before the host window appears)
