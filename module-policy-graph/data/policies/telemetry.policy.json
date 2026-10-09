@@ -1,7 +1,0 @@
-{
-  "module": "telemetry",
-  "tier": "infra",
-  "description": "遥测上报：等待各模块的发送授权对接",
-  "send": [],
-  "receive": []
-}

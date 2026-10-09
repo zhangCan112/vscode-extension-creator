@@ -1,9 +1,0 @@
-.vscode/**
-src/**
-node_modules/**
-esbuild.mjs
-tsconfig.json
-tsconfig.webview.json
-**/*.map
-.gitignore
-artifacts/**

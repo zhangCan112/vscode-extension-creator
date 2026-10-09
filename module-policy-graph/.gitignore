@@ -1,6 +1,0 @@
-node_modules/
-dist/
-out/
-artifacts/vsix/*
-!artifacts/vsix/.gitkeep
-*.vsix
