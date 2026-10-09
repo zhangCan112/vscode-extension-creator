@@ -4,7 +4,8 @@ Bring the extension's webview page **as-is** into a browser for the user to view
 
 ## When to use
 
-- Discussing webview UI design with the user during iteration: hand over a live preview that opens directly in a browser, or per-state screenshots fed into an annotation tool
+- **Proactive delivery (default action, don't wait for the user to ask)**: when a webview task reaches its first runnable milestone (canvas/page taking shape), immediately generate the live page described here and hand it to the user for review; deliver again after major UI changes. Not applicable to pure command / tree-view tasks
+- Discussing webview UI design with the user during iteration: hand over a live page that opens directly in a browser, or per-state screenshots fed into an annotation tool
 - Presenting the extension page in reviews / reports
 - Automated UI state verification (screenshot comparison)
 

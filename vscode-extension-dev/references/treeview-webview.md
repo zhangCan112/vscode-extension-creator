@@ -181,3 +181,7 @@ webview 加载是异步的，宿主创建 panel 后立刻 `postMessage` 会**丢
 - CSS 全部用 `--vscode-*` 主题变量（前景/背景/边框整套），不写死颜色
 - **canvas 渲染吃不到 CSS 变量**（图库大多画 canvas）：用 `getComputedStyle(document.body).getPropertyValue("--vscode-xxx")` 取值，再 `MutationObserver` 监听 body 的 `data-vscode-theme-kind` 属性变化热替换（主题切换不丢画布状态）
 - 动态改色时注意 CSP：`setAttribute("style", …)` 会被拦，但 CSSOM 写入（`el.style.color = …`）不受限——图例色块热更新用后者
+
+### 预览检查点（主动，不等用户开口）
+
+webview 达到**首个可运行里程碑**（画布 / 页面成形，能在宿主里跑通）时，按 `references/webview-preview.md` 生成实机活页交给用户 review（讨论 UI 时附批注层），再继续后续打磨；**重大 UI 改动后再给一版**。不要攒到全部完工才给——中途回收方向比终稿返工便宜。纯命令 / 树视图任务无此检查点。

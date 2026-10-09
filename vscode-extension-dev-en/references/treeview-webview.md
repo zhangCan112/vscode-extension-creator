@@ -181,3 +181,7 @@ A webview loads asynchronously; a `postMessage` fired right after `createWebview
 - Style exclusively with `--vscode-*` theme variables (the full foreground/background/border set); hard-coded colors are banned
 - **Canvas rendering cannot consume CSS variables** (most graph libraries paint canvas): resolve values with `getComputedStyle(document.body).getPropertyValue("--vscode-xxx")`, then watch body's `data-vscode-theme-kind` attribute with a `MutationObserver` and hot-swap — theme switches without losing canvas state
 - Mind the CSP when recoloring dynamically: `setAttribute("style", …)` gets blocked, but CSSOM writes (`el.style.color = …`) do not — hot-swap legend swatches with the latter
+
+### Preview checkpoint (proactive, never wait for the user to ask)
+
+When a webview reaches its **first runnable milestone** (canvas / page taking shape, running in the host), generate the live page per `references/webview-preview.md` and hand it to the user for review (attach the annotation layer when discussing UI), then continue polishing; **deliver again after major UI changes**. Do not save it all for the end — mid-course direction changes are cheaper than final rework. Pure command / tree-view tasks have no such checkpoint.
