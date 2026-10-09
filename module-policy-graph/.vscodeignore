@@ -8,3 +8,5 @@ tsconfig.webview.json
 .gitignore
 artifacts/**
 dist/selftest.js
+dist/preview-build.js
+preview-graph.html

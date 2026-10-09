@@ -41,7 +41,16 @@ async function main() {
     outfile: "dist/selftest.js",
   };
 
-  const configs = selftestOnly ? [selftest] : [host, web];
+  // pinpoint 审阅用静态快照生成器：领域代码 + dagre 布局 → 内联 SVG 的 HTML
+  const preview = {
+    ...shared,
+    entryPoints: ["src/preview/build.ts"],
+    format: "cjs",
+    platform: "node",
+    outfile: "dist/preview-build.js",
+  };
+
+  const configs = selftestOnly ? [selftest] : [host, web, preview];
   if (watch && !selftestOnly) {
     const contexts = await Promise.all(configs.map((c) => esbuild.context(c)));
     await Promise.all(contexts.map((ctx) => ctx.watch()));

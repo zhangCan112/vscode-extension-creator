@@ -191,6 +191,9 @@ function buildCy(p: GraphPayload): void {
     style: CY_STYLE,
     wheelSensitivity: 0.2,
   });
+  if (typeof window !== "undefined") {
+    (window as unknown as Record<string, unknown>).__mpgCy = cy;
+  }
   wireInteractions();
 }
 

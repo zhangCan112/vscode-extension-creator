@@ -4,3 +4,8 @@ out/
 artifacts/vsix/*
 !artifacts/vsix/.gitkeep
 *.vsix
+preview-payload.json
+preview-graph.html
+preview-live.html
+preview-annot.html
+preview-shots/

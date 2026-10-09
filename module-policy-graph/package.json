@@ -97,15 +97,19 @@
     "compile": "npm run check-types && node esbuild.mjs",
     "watch": "npm run check-types && node esbuild.mjs --watch",
     "package": "npm run check-types && node esbuild.mjs --production",
-    "selftest": "node esbuild.mjs --selftest && node dist/selftest.js"
+    "selftest": "node esbuild.mjs --selftest && node dist/selftest.js",
+    "preview": "node esbuild.mjs && node dist/preview-build.js"
   },
   "devDependencies": {
     "@types/cytoscape": "^3.21.0",
+    "@types/dagre": "^0.7.54",
     "@types/node": "22.x",
     "@types/vscode": "^1.85.0",
     "cytoscape": "^3.30.4",
     "cytoscape-dagre": "^2.5.0",
+    "dagre": "^0.8.5",
     "esbuild": "^0.25.0",
+    "playwright-core": "^1.64.0",
     "typescript": "^5.8.0"
   }
 }
