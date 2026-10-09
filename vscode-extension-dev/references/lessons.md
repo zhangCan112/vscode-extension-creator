@@ -47,6 +47,13 @@
 - 根因：布局与图语义错配、违反按需披露；skill 只覆盖 webview 工程层（双 bundle/CSP/主题），没有"图该怎么画"的风格层
 - 规则：风格指南成文 `references/graph-visualization.md`（布局选择 / 编码 / 渐进披露 / 规模阶梯 / 双向声明匹配），SKILL.md 路由表与何时使用已挂；聚焦 = 子图隔离而非淡化是本场最关键修正
 
+## 2026-10-09 第七场实测（module-policy-graph 隔离复测）：图风格层一次到位，新缺口集中在库类型面
+
+- 场景：不限定图库选型的隔离实测，仅凭 skill 从零建 policy 双向声明依赖图（四层 DAG + 声明匹配 + 确定性 100 模块压测 + VSIX）
+- 症状：图风格层零返工——自主走到 cytoscape + dagre TB 路线，子图隔离/三重编码/悬空编码/规模阶梯全部一次按 skill 执行；前六场累计修复（activationEvents、外链 CSP、双 bundle、viewWelcome 可达性等）本场继续全部一次通过。新缺口 2 处：@types/cytoscape 未声明 `show()/hide()` 且枚举样式属性拒绝 `data()` 映射、`Stylesheet` 类型已改名；可枚举验收缺第三 bundle 自验的成文做法
+- 根因：skill 只沉淀了布局扩展 ambient d.ts 一个库类型坑，没覆盖 @types 严格化后的样式表/集合类型面；"验收标准可枚举"时缺一键自验的工程套路
+- 规则：两处已分流——graph-visualization.md 落地要点（样式表整体 cast + 显隐走 class/display:none + 可见集合纯数据层算 id Set）、scaffold.md（第三 bundle selftest 套路）；本场另自验通过"空树才配 viewWelcome"与 engines 对齐两条既有规则（badge 超出 ^1.85 主动降级为 description）
+
 ## 2026-10-08 第五场实测（greek-relations，英文版验证）：英文树通过
 
 - 场景：两阶段隔离实测（阶段一：数据 + QuickPick 实时搜索 + 树联动；阶段二：Webview 图视图），全程只用 vscode-extension-dev-en

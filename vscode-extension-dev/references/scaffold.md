@@ -59,3 +59,7 @@ code --version   # VS Code CLI 可用
 | 激活了但命令报 not found | manifest 与代码的命令 ID 不一致（大小写也算） |
 | 打包报缺 README/publisher | 模板带了 stub README 但要重写；`publisher` 必须补上 |
 | 状态栏 / 启动期功能不出现 | 缺 `"activationEvents": ["onStartupFinished"]`，隐式激活只覆盖命令和视图触发 |
+
+## 可枚举验收 → 第三 bundle 自验
+
+需求给出可枚举的预期结果（如"10 文件、恰 N 条对齐、某循环、某悬空"）时，加一个 esbuild 第三入口（node/cjs）打成 `dist/selftest.js`，`npm run selftest` 一键核对。前提：领域代码（解析/匹配/生成器）放独立目录且**不 import vscode**，宿主与 selftest 共同复用。`.vscodeignore` 排除 `dist/selftest.js`。
