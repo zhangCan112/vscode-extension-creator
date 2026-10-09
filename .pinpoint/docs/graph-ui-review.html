@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"/><title>graph-ui-review</title></head>
+<body>
+<h1>关系图 Webview · 最终 UI 实机截图审阅</h1>
+<p>以下 7 张全部是<strong>最终交付的 dist/webview.js 真实运行截图</strong>（无头 Edge 实拍，注入真实 policy 数据与 VS Code 深色主题变量），不是示意图或重建。你点击任意图片块写意见即可；意见请落到图上具体位置（如"左下图例第 3 行""右上角落节点标签"）。</p>
+<p>说明：截图无法承载动效（悬停高亮、缩放骨架化、拖拽、Esc 返回），这些请 F5 实测。</p>
+<h2>1 · 总览 · 10 模块（深色主题，默认落地页）</h2>
+<p>dagre 自上而下分层（entry→infra），箭头=消息流方向；三种消息类型=颜色×线型×箭头形状；琥珀虚线为两条悬空声明；节点大小/字号=耦合度（workspace 最大）。</p>
+<p><img alt="" src="../assets/01-overview-dark.png"/></p>
+<h2>2 · 总览 · 浅色主题（主题跟随切换，图状态不丢）</h2>
+<p>与上一张同一数据，切换 VS Code 浅色主题后的画布（canvas 颜色热替换）。</p>
+<p><img alt="" src="../assets/02-overview-light.png"/></p>
+<h2>3 · 聚焦 workspace（点模块 → 模块级）</h2>
+<p>子图隔离后宽松重排，画面只剩该模块相关关系；右侧 policy 详情面板（发送/接受清单 + ✓/✗ 对齐状态，行可点下钻）；面包屑「总览›workspace」。</p>
+<p><img alt="" src="../assets/03-focus-workspace.png"/></p>
+<h2>4 · 聚焦单条通道（点详情行 → 通道级）</h2>
+<p>画面只剩 workspace→editor 一条 command 通道；边文字显示消息类型；右侧通道详情（类型/匹配状态/循环标记）。</p>
+<p><img alt="" src="../assets/04-channel.png"/></p>
+<h2>5 · 只看悬空（一键筛出问题声明）</h2>
+<p>工具栏「只看悬空」开启：只剩悬空发送（git→logger query）与悬空订阅（app-shell→settings command）及端点模块；信息栏出现 [只看悬空] 标记。</p>
+<p><img alt="" src="../assets/05-dangling-only.png"/></p>
+<h2>6 · 高亮循环（仅统计已对齐通道）</h2>
+<p>「高亮循环」开启：workspace↔editor 两条循环通道洋红色强调；信息栏列出涉及模块。</p>
+<p><img alt="" src="../assets/06-cycle-hl.png"/></p>
+<h2>7 · 100 模块演示总览（确定性生成）</h2>
+<p>固定种子生成的演示数据全图：217 对齐通道（35% 透明度骨架化）+ 11 悬空；infra-01 / infra-02 为耦合枢纽（度数 10/11，节点最大）。静态截图为整图等比缩放，真实页面中可缩放浏览。</p>
+<p><img alt="" src="../assets/07-demo-100.png"/></p>
+</body></html>
